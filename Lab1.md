@@ -1,14 +1,19 @@
 
 ## 1. Phân tích kiến trúc
 ### 1.1 Đề xuất kiến trúc : Chọn kiến trúc tầng.
+
 - Lớp giao diện(Presentation Layer):Lớp này sẽ chịu trách nhiệm hiển thị dữ liệu và giao tiếp với người dùng.
 - Lớp ứng dụng(Application Layer): Lớp này là trung tâm xử lý logic nghiệp vụ của hệ thống, gồm các tác vụ như xử lý bảng lương, duy trì thẻ thời gian và thực hiện tính toán thanh toán.
 - Lớp dữ liệu(Data Layer): Lớp này chịu trách nhiệm quản lý lưu trữ và truy xuất dữ liệu từ cơ sở dữ liệu.
+  
   1.2 Giải thích lý do lựa chọn:
+  
   - Mỗi lớp có một trách nhiệm cụ thể, dễ duy trì và phát triển theo từng chức năng riêng biệt.
   - Lớp Dữ Liệu được cách ly, giảm nguy cơ truy cập trực tiếp từ lớp giao diện, giúp bảo vệ thông tin nhạy cảm như bảng lương và thông tin thanh toán.
   - Mỗi lớp có thể được mở rộng hoặc thay đổi mà không ảnh hưởng nhiều đến các lớp khác, phù hợp cho hệ thống cần phát triển dài hạn.
+    
   1.3 Ý nghĩa:
+  
     - Lớp giao diện : Cung cấp giao diện để người dùng tương tác với hệ thống.
     - Lớp ứng dụng: Thực hiện các logic nghiệp vụ cốt lõi của hệ thống như xử lý thanh toán, tính toán bảng lương, và duy trì thông tin thẻ thời gian.Tương tác với         lớp dữ liệu để lưu trữ hoặc truy xuất thông tin cần thiết.
     - Lớp dữ liệu: Quản lý các thao tác lưu trữ và truy vấn từ cơ sở dữ liệu, chẳng hạn như thông tin nhân viên, thời gian làm việc, và thông tin thanh toán.
@@ -16,12 +21,14 @@
       
   1.4 Package:
       ![](https://www.planttext.com/api/plantuml/png/T9112i9034NtEKNelbUG5dGXk2XuWZYDCdGwCoHZeOWdS-6Hl8BEncgjMUQ___F9utQlD96aS-z0E-jHWZ929DFHYR5eX9LzecI3nnsDB0LU05zZ7AdYfeykZCnRdrYEPFX3gzlU-acumXHRn-Yi-PlQq2Z1kJtBO6VEDILQikJzWJJ3FvsmB5UpJ8JlTWi8p1oPU5-1YdsRd_O4003__mC0)
+  
 ## 2. Cơ chế phân tích :
   - Cơ chế xác thực người dùng :Đảm bảo rằng chỉ có những người dùng hợp lệ mới có thể truy cập vào hệ thống. Điều này là cần thiết để bảo vệ thông tin nhạy cảm như bảng lương và dữ liệu cá nhân của nhân viên.
   - Cơ chế phân quyền : Đảm bảo rằng người dùng chỉ có thể thực hiện các thao tác mà họ được phép. Ví dụ, nhân viên chỉ có quyền xem thông tin cá nhân của mình, trong khi quản lý có quyền sửa đổi thông tin nhân viên và duyệt bảng lương.
   - Cơ chế tính toán bảng lương : Tính toán các khoản thanh toán cho nhân viên dựa trên thời gian làm việc, thuế, và các khoản khấu trừ khác. Cơ chế này cần phải chính xác để tránh sai sót có thể gây ra tranh chấp hoặc vấn đề tài chính.
   - Cơ chế lưu trữ và truy xuất dữ liệu:  Quản lý việc lưu trữ và truy xuất thông tin về nhân viên, thời gian làm việc và bảng lương. Điều này rất quan trọng để đảm bảo dữ liệu luôn có sẵn và dễ dàng truy cập khi cần.
   - Cơ chế tạo báo cáo : Cung cấp báo cáo tổng hợp về bảng lương, thời gian làm việc và hiệu suất làm việc của nhân viên. Các báo cáo này giúp quản lý đưa ra quyết định dựa trên dữ liệu.
+    
 ##3.Phân tích ca sử dụng Payment
   - PaymentProcessor: Chịu trách nhiệm xử lý các giao dịch thanh toán.
   - Employee: Đại diện cho nhân viên nhận thanh toán.
