@@ -66,3 +66,12 @@
   - TimecardManager: Quản lý việc tạo và cập nhật timecard, với các thuộc tính và phương thức liên quan đến việc duy trì thông tin thời gian làm việc.
   - Timecard: Lưu trữ các thuộc tính liên quan đến thời gian làm việc của nhân viên.
   - PayrollDatabase: Quản lý truy cập đến cơ sở dữ liệu, cung cấp phương thức để lưu trữ timecard.
+
+##5.Hợp nhất kết quả phân tích:
+
+- Kiến trúc hệ thống
+
+Hệ thống "Payroll System" được thiết kế với cấu trúc kiến trúc theo mô hình 3 lớp (Three-tier Architecture), bao gồm:
+Presentation Layer (Lớp giao diện): Chịu trách nhiệm tương tác với người dùng qua các lớp như PaymentUI và TimecardUI.
+Business Logic Layer (Lớp logic nghiệp vụ): Chứa các lớp điều khiển như PaymentController và TimecardController để xử lý các nghiệp vụ thanh toán và quản lý bảng chấm công.
+Data Layer (Lớp dữ liệu): Lưu trữ và quản lý dữ liệu trong các lớp thực thể như Payment, Order, và Timecard.
