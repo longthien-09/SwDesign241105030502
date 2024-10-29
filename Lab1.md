@@ -48,6 +48,7 @@
   -  PayrollDatabase: Quản lý việc truy xuất và lưu trữ thông tin liên quan đến thanh toán. PayrollDatabase cung cấp phương thức để lấy dữ liệu nhân viên và lưu lại kết quả thanh toán.
  
 ##4. Phân Tích Ca Sử Dụng "Maintain Timecard
+
 ###4.1: Xác Định Các Lớp Phân Tích Cho Ca Sử Dụng "Maintain Timecard"
     - TimecardManager: Chịu trách nhiệm quản lý các thao tác liên quan đến ghi và duy trì thời gian làm việc.
     - Timecard: Lớp lưu trữ thông tin về thời gian làm việc, bao gồm ngày làm việc và số giờ làm.
