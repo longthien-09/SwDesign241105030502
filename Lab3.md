@@ -6,7 +6,7 @@
 
 #### BankSystem
 - Biểu đồ ngữ cảnh của hệ thống con BankSystem:
-![alt text](https://www.planttext.com/api/plantuml/png/f591JiCm4BplArOz5ObMS8sgg89JRqYym3WROTLPLzuD8a9z6GUUn1U86mmcLKzSxBLdPdSyykVxnrRKHEqx3s2z4S47CyJW_NrWJJj5t6piTAXhV0D4Z3r_ivPNS0Hmh1HROmbtTuRtZuCeTQFivpuB6pe4SReqezm-azrNcAjh7DaXoIjCwuxR4...0F__0m00)
+![alt text] 
 
 - Giải thích biểu đồ:
 
@@ -77,7 +77,7 @@ Interface (IBankSystem):
 
  #### PrintService
 - Biểu đồ ngữ cảnh của hệ thống con PrintService:
-![alt text](https://www.planttext.com/api/plantuml/png/l5D1JiCm4Bpd5HQdzj0Ahb4KLQ92AYfIeIzmxMqQaSIHlQa8Y9Tnu4byWTquZX9L877XudXtrZlZyURhutFbK5fioY9IXNHEx6HhJL7ScWhv2rOaYV91cegtI0XHsxn2gbCdKC-pUVGUHPG0UvGAn6R7w1xiEQSeIGPaSdgcZMfAg30MwtutPp03x...003__mC0)
+![alt text]()
 
 
 - Giải thích biểu đồ:
@@ -113,3 +113,50 @@ Interface (IBankSystem):
       - removeJob(documentId: int): Loại bỏ tài liệu khỏi hàng đợi.
       - getQueueLength(): Trả về số lượng tài liệu còn lại trong hàng đợi.
       - clearQueue(): Xóa tất cả các công việc trong hàng đợi.
+2. Analysis class to design element map
+Hệ thống con BankSystem
+Các lớp phân tích:
+
+PayrollController (Lớp điều khiển)
+IBankSystem (Giao diện)
+BankSystem (Proxy hệ thống con)
+Tiền lương (Thực thể)
+BankInformation (Thực thể)
+Các yếu tố thiết kế:
+
+Người kiểm soát tiền lương:
+
+Yếu tố thiết kế: Lớp điều khiển
+Sẽ được triển khai như một lớp điều khiển trong giai đoạn thiết kế. Nó sẽ quản lý các tương tác giữa giao diện người dùng và BankSystem.
+Mẫu thiết kế mẫu: Mẫu Facade để đơn giản hóa tương tác với BankSystem.
+Phương pháp thực hiện: runPayroll()quản lý quy trình tính lương.
+Hệ thống IBank:
+
+Yếu tố thiết kế: Giao diện
+Điều này sẽ được chuyển thành giao diện trong thiết kế, xác định hợp đồng để tương tác với các triển khai BankSystem khác nhau.
+Phương pháp thực hiện:deposit(Paycheck, BankInformation)
+Hệ thống ngân hàng:
+
+Phần tử thiết kế: Lớp hệ thống con (Proxy)
+Lớp này hoạt động như một proxy cho BankSystem thực tế, xử lý tương tác cấp thấp với các API hoặc dịch vụ ngân hàng bên ngoài.
+Phương pháp thực hiện: deposit(), verifyAccount(),logTransaction()
+Mẫu thiết kế mẫu: Mẫu proxy để cung cấp cổng truy cập vào BankSystem.
+Tiền lương:
+
+Yếu tố thiết kế: Lớp thực thể
+Nó sẽ được biểu diễn như một đối tượng đơn giản lưu trữ thông tin về tiền lương, bao gồm các thuộc tính như số tiền, ID nhân viên và ngày trả lương.
+Mẫu thiết kế mẫu: Đối tượng truyền dữ liệu (DTO) để truyền dữ liệu tiền lương giữa các lớp.
+Thông tin ngân hàng:
+
+Yếu tố thiết kế: Lớp thực thể
+Sẽ được triển khai như một lớp lưu trữ thông tin tài khoản ngân hàng cần thiết để xử lý giao dịch.
+Mẫu thiết kế mẫu: Đối tượng giá trị để biểu diễn dữ liệu không thay đổi.
+Hệ thống con PrintService
+Các lớp phân tích:
+
+PrintService (Lớp điều khiển)
+IPrintService (Giao diện)
+PrintService (Proxy hệ thống con)
+Tài liệu (Thực thể)
+Trạng thái (Thực thể)
+Hàng đợi (Thực thể)
