@@ -126,7 +126,7 @@ Biểu đồ tuần tự:
     + mailingAddress: Địa chỉ nhân viên.
     + ssn: Số an sinh xã hội.
     + taxDeductions: Các khoản khấu trừ thuế.
-    + otherDeductions: Các khoản khấu trừ khác như bảo hiểm y tế, 401k.
+    + otherDeductions: Các khoản khấu trừ khác như bảo hiểm y tế.
     + phoneNumber: Số điện thoại của nhân viên.
     + hourlyRate: Mức lương theo giờ (nếu là nhân viên theo giờ).
     + salary: Mức lương cố định (nếu là nhân viên theo lương).
@@ -146,3 +146,55 @@ Biểu đồ tuần tự:
 
 Biểu đồ lớp:
 ![](https://www.planttext.com/api/plantuml/png/Z9J1JiCm38RlVOgeft7O2-o0Dcb3J488CLuWMxmjKX8N9nbKY2VZm2Fn2hIXhP9s7RirzcSdzc_tv-jxRXqdvxNATefRovvuIQZKGcXff7N47HBxo1YRCc-13DSmOnj7qXo2iQY2tf14P6ICuDM3TNVUx9n4CxcPiHDA4Nm5uKaAMEb2OGcmDdiapGC6ZMt6McyS2CO1TM6YezVTtItzcJN5j7HJm30Yc0SrjTnBMQGEpQMglXT245YRkAmroTdnzoK87-glI85-go1uq1s1Hdp54GqyUhq5Ih8TqPCgdxc31BTSSIeJqmwrbjPMcGTqdUH1QkaYAsE-41LOop0Pz6zJMWSwTE-og0TmiQ3djMc94C65QC__wFxtm2jX0GhEmCCP2R2qXUBbYWXfeYj5-G7ESJiqUqbwMUTkAjyYAk0c6hKwoJqtGW4r3RisVTFOjIcyYpKukuhJwMqhoupb0qtoQw8khE1r2VghM4KrpfhhjguY-uCnJiO3CKxrXc4Sx0r23up5gk5OgSjeAbQUTNUc7OgtAi_cO4JzY_q5003__mC0)
+II. Code java mô phỏng ca sử dụng Maintain Timecard. import java.util.ArrayList; import java.util.Date; import java.util.Scanner;
+
+// Lớp đại diện cho thông tin của một nhân viên class Employee { private String employeeId; private String name;
+
+public Employee(String employeeId, String name) { this.employeeId = employeeId; this.name = name; }
+
+public String getEmployeeId() { return employeeId; }
+
+public String getName() { return name; } }
+
+// Lớp đại diện cho thông tin thẻ chấm công (timecard) class Timecard { private String employeeId; private Date date; private float hoursWorked;
+
+public Timecard(String employeeId, Date date, float hoursWorked) { this.employeeId = employeeId; this.date = date; this.hoursWorked = hoursWorked; }
+
+public String getEmployeeId() { return employeeId; }
+
+public Date getDate() { return date; }
+
+public float getHoursWorked() { return hoursWorked; }
+
+@Override public String toString() { return "Timecard{" + "employeeId='" + employeeId + ''' + ", date=" + date + ", hoursWorked=" + hoursWorked + '}'; } }
+
+// Lớp đại diện cho bộ điều khiển quản lý thẻ chấm công class TimecardController { private ArrayList timecards = new ArrayList<>();
+
+// Phương thức để ghi lại thông tin thẻ chấm công public void addTimecard(String employeeId, Date date, float hoursWorked) { Timecard timecard = new Timecard(employeeId, date, hoursWorked); timecards.add(timecard); System.out.println("Timecard đã được ghi nhận: " + timecard); }
+
+// Phương thức để xem thẻ chấm công của nhân viên public void viewTimecards(String employeeId) { System.out.println("Danh sách thẻ chấm công của nhân viên ID: " + employeeId); for (Timecard tc : timecards) { if (tc.getEmployeeId().equals(employeeId)) { System.out.println(tc); } } } }
+
+public class Main { public static void main(String[] args) { Scanner scanner = new Scanner(System.in); TimecardController timecardController = new TimecardController();
+
+// Danh sách nhân viên mẫu
+Employee employee1 = new Employee("E001", "John Doe");
+Employee employee2 = new Employee("E002", "Jane Smith");
+
+// Ghi thẻ chấm công cho nhân viên
+System.out.println("Nhập số giờ làm việc của nhân viên " + employee1.getName() + ":");
+float hoursWorked1 = scanner.nextFloat();
+timecardController.addTimecard(employee1.getEmployeeId(), new Date(), hoursWorked1);
+
+System.out.println("Nhập số giờ làm việc của nhân viên " + employee2.getName() + ":");
+float hoursWorked2 = scanner.nextFloat();
+timecardController.addTimecard(employee2.getEmployeeId(), new Date(), hoursWorked2);
+
+// Xem thẻ chấm công
+System.out.println("\nDanh sách thẻ chấm công của " + employee1.getName() + ":");
+timecardController.viewTimecards(employee1.getEmployeeId());
+
+System.out.println("\nDanh sách thẻ chấm công của " + employee2.getName() + ":");
+timecardController.viewTimecards(employee2.getEmployeeId());
+
+scanner.close();
+} }
