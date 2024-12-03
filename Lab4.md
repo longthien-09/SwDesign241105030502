@@ -1,106 +1,111 @@
 ## Phân tích và thiết kế ca sử dụng
 ### 1. Login:
-- Mô tả:
-    + Đăng nhập là bước khởi đầu để người dùng truy cập vào hệ thống và sử dụng các chức năng khác.
 
-- Actor: Nhân viên, Quản lý, Bộ phận nhân sự.
-- Luồng chính:
-    + Người dùng mở giao diện đăng nhập.
-    + Nhập tên đăng nhập và mật khẩu.
-    + Hệ thống xác thực thông tin.
-    + Nếu hợp lệ, chuyển người dùng đến giao diện chính.
-- Luồng phụ:
-    + Nếu sai tên đăng nhập hoặc mật khẩu, hiển thị thông báo lỗi và yêu cầu nhập lại.
-    + Nếu tài khoản bị khóa, hiển thị thông báo liên hệ quản trị viên.
-- Lý do thiết kế:
-    + Bảo vệ dữ liệu nhạy cảm (lương, thông tin nhân viên).
-    + Xác định quyền hạn của người dùng dựa trên vai trò (nhân viên, quản lý, nhân sự).
-### 2. Nhập giờ làm việc
-- Mô tả:
-    + Nhân viên nhập số giờ làm việc để hệ thống làm cơ sở tính lương.
-- Actor: Nhân viên.
-- Luồng chính:
-    + Nhân viên đăng nhập vào hệ thống.
-    + Chọn tính năng "Nhập giờ làm việc".
-    + Nhập số giờ làm việc vào biểu mẫu.
-    + Gửi yêu cầu đến hệ thống.
-    + Hệ thống kiểm tra dữ liệu (vd: giờ không được âm, số giờ không vượt quá giới hạn).
-    + Lưu thông tin vào cơ sở dữ liệu.
-- Luồng phụ:
-    + Nếu nhập dữ liệu không hợp lệ, hiển thị thông báo lỗi và yêu cầu nhập lại.
-- Lý do thiết kế:
-    + Dữ liệu giờ làm việc là yếu tố cốt lõi để tính toán lương.
-    + Đơn giản hóa quy trình nhập dữ liệu cho nhân viên.
-### 3. Tính lương
-- Mô tả:
-    + Quản lý yêu cầu hệ thống tính toán lương cho tất cả nhân viên dựa trên giờ làm việc và các quy định.
-- Actor: Quản lý.
-- Luồng chính:
-    + Quản lý đăng nhập vào hệ thống.
-    + Chọn chức năng "Tính lương".
-    + Hệ thống truy xuất dữ liệu giờ làm việc và thông tin nhân viên từ cơ sở dữ liệu.
-    + Áp dụng công thức tính lương (Lương cơ bản + Phụ cấp - Các khoản trừ).
-    + Lưu kết quả lương vào cơ sở dữ liệu.
-    + Hiển thị thông báo hoàn tất.
-- Luồng phụ:
-    + Nếu thiếu dữ liệu giờ làm việc hoặc thông tin lương cơ bản, hiển thị lỗi yêu cầu bổ sung.
-- Lý do thiết kế:
-    + Tự động hóa việc tính lương, giảm thiểu sai sót và tiết kiệm thời gian.
-### 4. Tạo phiếu lương
-- Mô tả:
-    + Hệ thống tạo phiếu lương cá nhân cho từng nhân viên, phục vụ việc tra cứu hoặc gửi qua email.
-- Actor: Bộ phận nhân sự.
-    + Luồng chính:
-    + Bộ phận nhân sự đăng nhập vào hệ thống.
-    + Chọn tính năng "Tạo phiếu lương".
-    + Hệ thống lấy dữ liệu lương từ cơ sở dữ liệu.
-    + Tạo phiếu lương theo định dạng PDF hoặc Excel.
-    + Gửi phiếu lương qua email hoặc lưu trữ để tải xuống.
-- Lý do thiết kế:
-    + Đáp ứng nhu cầu thông báo lương cho nhân viên một cách chính xác và minh bạch.
-### 5. Tạo báo cáo lương
-- Mô tả:
-    + Quản lý tạo báo cáo tổng hợp về tình hình lương của công ty trong một khoảng thời gian.
-- Actor: Quản lý.
-- Luồng chính:
-    + Quản lý đăng nhập vào hệ thống.
-    + Chọn tính năng "Tạo báo cáo lương".
-    + Nhập các tiêu chí báo cáo (tháng/năm, phòng ban, nhân viên cụ thể).
-    + Hệ thống tổng hợp dữ liệu lương theo yêu cầu.
-    + Xuất báo cáo dưới dạng PDF/Excel.
-- Luồng phụ:
-    + Nếu không có dữ liệu cho tiêu chí báo cáo, hiển thị thông báo "Không có dữ liệu".
-- Lý do thiết kế:
-    + Cung cấp công cụ hỗ trợ quản lý trong việc theo dõi và phân tích chi phí lương.
-3. Lý do thiết kế các ca sử dụng
-Phù hợp với nghiệp vụ thực tiễn:
+Mô tả ca sử dụng:
+- Actor: Employee, PayrollAdministrator
 
-Các ca sử dụng đáp ứng đúng yêu cầu quản lý lương và xử lý thanh toán trong các doanh nghiệp.
-Đảm bảo sự phân quyền rõ ràng giữa nhân viên, quản lý và nhân sự.
-Tăng hiệu quả và tự động hóa:
+- Mục đích: Xác thực người dùng để truy cập hệ thống.
 
-Các chức năng tính lương, tạo phiếu lương, và báo cáo đều tự động, giảm công việc thủ công.
-Quy trình rõ ràng giúp người dùng dễ sử dụng.
-Tính bảo mật:
+Luồng chính
 
-Yêu cầu đăng nhập giúp hạn chế truy cập trái phép.
-Dữ liệu nhạy cảm như lương và thông tin cá nhân được bảo vệ trong toàn bộ hệ thống.
-Khả năng mở rộng:
+- Người dùng mở giao diện đăng nhập.
 
-Các ca sử dụng được thiết kế để dễ dàng bổ sung chức năng mới (ví dụ: quản lý thưởng, quản lý nghỉ phép).
-4. Biểu đồ tuần tự minh họa
-Biểu đồ tuần tự: Đăng nhập
-Actors: Nhân viên, Quản lý.
-Objects: LoginForm, Database.
-Tương tác:
-Actor gửi yêu cầu đăng nhập với tên và mật khẩu.
-LoginForm xác thực thông tin với Database.
-Nếu hợp lệ, cấp quyền truy cập và trả về giao diện chính.
-Biểu đồ tuần tự: Tính lương
-Actors: Quản lý.
-Objects: PayrollForm, Database.
-Tương tác:
-Quản lý gửi yêu cầu tính lương.
-PayrollForm truy xuất dữ liệu từ Database.
-Áp dụng công thức tính lương.
-Lưu kết quả và thông báo hoàn tất.
+- Người dùng nhập tên đăng nhập và mật khẩu.
+
+- Hệ thống gửi thông tin đăng nhập đến SecuritySubsystem để xác thực.
+
+- Nếu thông tin hợp lệ:
+
+    + Hệ thống cấp quyền truy cập và chuyển đến giao diện chính.
+
+- Nếu thông tin không hợp lệ:
+    
+    + Hệ thống hiển thị thông báo lỗi.
+
+Các lớp tham gia
+
+- Boundary Class: LoginForm
+
+- Control Class: LoginController
+
+- Entity Class: User, SecuritySubsystem
+  
+Biểu đồ tuần tự
+![](https://www.planttext.com/api/plantuml/png/Z98xJiGm48Pxds8km0LIe4Kh0HAFPg6WJ1mhjfJOu8T4wYqegBQYX0WX9AGKI5HEiOLp4P-0A-1aWTsm4U32ch7-__FCsE_DSg9qBBKfSXHZBIISAo8XLh3NPIWHXgUnBE5OP8pl2raWBBYM8b-TJ5T9JYGYN3DTzlwlU4QmaI6OcKILIfC2eHuBExjhO0Gdlhc7ZCK2KkQR6mxjeftp33Zrjhv4tyhErliZE0p2EGTDVNExQHtbd_QS87PlWQhPhnVyQ2k20z_Kx0_pMjyXjjgEuCAz6C3UFXkuTXNk2t_5Q4ivMi6HjqiDLyRRnu4xpZMSKVV0AU2kEWHXZTIpCOefDMK_kNOHe7mmTKnTpIaYkI81w-sJXiJRYlq3EtYEpr4bhXAG--QEXU-GeadOkb_s0G00__y30000)
+
+### 2. Maintain Timecard
+
+Mô tả ca sử dụng
+
+- Actor: Employee
+
+- Mục đích: Nhân viên nhập và lưu giờ làm việc vào hệ thống.
+
+Luồng chính
+
+- Nhân viên mở giao diện nhập thẻ chấm công (TimecardForm).
+
+- Nhân viên điền số giờ làm việc và mã dự án (nếu có).
+
+- Giao diện gửi thông tin đến TimecardController.
+
+- TimecardController lưu thông tin vào Timecard.
+
+- Nếu cần, TimecardController lấy dữ liệu dự án từ ProjectManagementDatabase.
+
+- Hiển thị thông báo thành công.
+
+Các lớp tham gia
+
+- Boundary Class: TimecardForm
+
+- Control Class: TimecardController
+
+- Entity Class: Timecard, ProjectManagementDatabase
+
+Biểu đồ tuần tự
+![](https://www.planttext.com/api/plantuml/png/X59DIiGm5Dxd5Ey2Ng0B6V0NTCI56vTf6zf8cenf8dJjmeKh3o3EC8WW32guQXQpA7YFTmAlOCfOsrAhMIMFx-Tzx-NJhIUveThOJ10Q6QLXBvi9LJ16GcLbJ7K1PpnZ4TNnlj8PYPGqMecVuixcBPWcJ1fkMdZpFjNgWaLcIYLDMEQBkzJGaEQCaCOBjhPxBW5CqJr0mgc2cAExaQrg5rVp6eq03ZtoMe99qTrskN_OdAHOhcQGexlp37JtS5ND8QkM4ADxWseX1tx3u04Se5lncl82ehQqP8ZgSWCu_dYrFG8L1iwhPmiHba_MXwZUPGA6oxOJyETttT4HUoCi7ujHkL7YMD8ZBDS6BYsMIx_V-9-Sco7tzlBTILWjL7sVonIYka8cNgx-XLy0003__mC0)
+
+### 3. Run Payroll
+
+Mô tả ca sử dụng
+
+- Actor: PayrollAdministrator
+
+- Mục đích: Xử lý lương cho nhân viên.
+
+Luồng chính
+
+- Quản trị viên khởi chạy chức năng tính lương.
+
+- Hệ thống lấy dữ liệu từ Timecard và EmployeeDatabase.
+
+- PayrollController thực hiện tính toán thông qua Payroll.
+
+- Hệ thống chuyển kết quả tới:
+
+    + BankSystem để thanh toán.
+
+    + PrintService để in phiếu lương.
+
+Các lớp tham gia
+
+- Boundary Class: PayrollUI
+
+- Control Class: PayrollController
+
+- Entity Class: Employee, Timecard, Payroll, BankSystem, PrintService
+
+Biểu đồ tuần tự
+![](https://www.planttext.com/api/plantuml/png/V5B1IWCn4BtdA-O7_84zI5Ky53q8NK6FQJOqmUoaPhE5V85dZvwqWWZ5eWTFNQI7IFyZNz1VC8lTReMjEGoPcRmtRsQohfQzmb9ZormHogmsS46TqKeTPRb4MLX3Ov0CTOaPDQx9NlO9qsZZjOcS_BgA6yBHIklWD1yhxJXl_5Jcd56JDVu6sBZ756y6hh0ytpum4ks0cubad90kNN1ms2fAu4o4wb72ztse7d04jwK3Q_mR2h1-7grQVQocE29Ro0w-rP_0jP-LmCBYjUm6jczhWgRF1Cx3uiL15gftK39KToMWyCy84-bds0rkXj85PYA6Sc3-Sr_fJJ21z8zCgYoaWjPzQp_5E0WAEAgL2FyKyn1F9r-xWmIkGZK7vR_0jao4gu937s4iP5Wiost5lOoxEqowa1opVtkhzvgAUWGmz5CDGiSMegPe1Ub5TFrpVm000F__0m00)
+
+## Lý do thiết kế
+
+### 1. Tách biệt trách nhiệm (SRP):
+Các lớp được thiết kế theo nguyên lý SRP (Single Responsibility Principle), với các chức năng cụ thể như quản lý giao diện, xử lý điều khiển, và lưu trữ dữ liệu.
+
+### 2. Khả năng mở rộng:
+Các lớp Controller có thể được mở rộng thêm các tính năng khác (ví dụ: thêm xác thực hai bước cho LoginController).
+
+### 3. Tính nhất quán:
+Hệ thống tuân thủ quy trình chuẩn trong thiết kế, giúp đảm bảo tính nhất quán và dễ dàng bảo trì.
